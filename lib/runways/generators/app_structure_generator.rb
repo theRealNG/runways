@@ -40,6 +40,13 @@ class AppStructure < Thor::Group
     )
   end
 
+  def generate_service_file
+    template(
+      "templates/service.tt",
+      "#{name}/lib/#{name.underscore}_service.rb"
+    )
+  end
+
   private
   def create_following_dirs(dir_paths)
     dir_paths.each do |dir_path|
