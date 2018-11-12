@@ -47,6 +47,13 @@ class AppStructure < Thor::Group
     )
   end
 
+  def generate_server_file
+    template(
+      "templates/server.tt",
+      "#{name}/#{name.underscore}_server.rb"
+    )
+  end
+
   private
   def create_following_dirs(dir_paths)
     dir_paths.each do |dir_path|
