@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    runways (0.1.3)
+    runways (0.1.4)
       activerecord (~> 5.2)
       grpc (~> 1.16)
       grpc-tools (~> 1.16)
@@ -48,4 +48,4 @@ DEPENDENCIES
   runways!
 
 BUNDLED WITH
-   1.16.2
+   1.16.6

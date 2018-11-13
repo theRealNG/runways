@@ -17,12 +17,13 @@ class AppStructure < Thor::Group
     db_directory = root_directory + "/db"
     migration_directory = db_directory + "/migrate"
     lib_directory = root_directory + "/lib"
+    lib_protos_directory = lib_directory + "/protos"
     tasks_directory = lib_directory + "/tasks"
     config_directory = root_directory + "/config"
 
     create_following_dirs([
       root_directory, app_directory, config_directory,
-      lib_directory, tasks_directory,
+      lib_directory, lib_protos_directory, tasks_directory,
       models_directory, controller_directory,
       db_directory, migration_directory,
     ])
