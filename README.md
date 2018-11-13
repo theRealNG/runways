@@ -1,28 +1,16 @@
 # Runways
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/runways`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Runways is a gRPC based ruby application. It will setup the basic project structure with active_record ORM.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'runways'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+Install Runways at the command prompt:
 
     $ gem install runways
 
-## Usage
+Create a new runways application
 
-TODO: Write usage instructions here
+		$ runways hello
 
 ## Development
 
@@ -41,3 +29,7 @@ The gem is available as open source under the terms of the [MIT License](https:/
 ## Code of Conduct
 
 Everyone interacting in the Runways project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/runways/blob/master/CODE_OF_CONDUCT.md).
+
+## TODO
+[] Setup rake tasks for active record migrations
+[] Use ActiveRecord generators to handle ActiveRecord related tasks ( ex: generate migration, migrate, rollback )

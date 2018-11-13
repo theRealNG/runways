@@ -13,11 +13,13 @@ class AppStructure < Thor::Group
     root_directory = name.to_s
     app_directory = root_directory + "/app"
     models_directory = app_directory + "/models"
+    controller_directory = app_directory + "/controllers"
+    db_directory = root_directory + "/db"
     lib_directory = root_directory + "/lib"
 
     create_following_dirs([
-      root_directory, app_directory, 
-      models_directory, lib_directory,
+      root_directory, app_directory, db_directory,
+      models_directory, controller_directory, lib_directory,
     ])
   end
 
