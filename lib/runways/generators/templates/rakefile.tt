@@ -1,0 +1,7 @@
+# frozen_string_literal: true
+
+require './lib/<%= name.underscore %>_service'
+
+Dir[File.expand_path 'lib/tasks/*.rake'].each do |file|
+  import file
+end

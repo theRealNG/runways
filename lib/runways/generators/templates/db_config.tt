@@ -1,0 +1,17 @@
+# frozen_string_literal: true
+
+class DbConfig
+  def self.config
+    {
+      adapter: '',
+      host: '',
+      username: '',
+      password: '',
+      database: '',
+      pool: '',
+      timeout: '',
+      reconnect: true
+    }
+  end
+end
+
