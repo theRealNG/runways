@@ -28,6 +28,10 @@ class AppStructure < Thor::Group
     template("templates/proto.tt", "#{name}/proto/#{name}.proto")
   end
 
+  def generate_gemfile
+    template("templates/gemfile.tt", "#{name}/Gemfile")
+  end
+
   def generate_application_record
     template(
       "templates/application_record.tt",
