@@ -1,0 +1,7 @@
+namespace :protobuf_files do
+  desc 'Update protobuf files'
+	task :update do
+		lang = ARGV[1] || 'ruby'
+		`grpc_tools_ruby_protoc -I proto --ruby_out=lib/protos --grpc_out=lib/protos proto/<%= name.underscore %>.proto`
+	end
+end

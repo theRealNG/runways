@@ -12,6 +12,10 @@ Create a new runways application
 
 		$ runways hello
 
+Run the following rake task to update protobuf files
+```ruby
+	rake protobuf_files:update
+```
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
