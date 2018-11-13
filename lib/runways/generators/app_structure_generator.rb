@@ -77,6 +77,10 @@ class AppStructure < Thor::Group
     template("templates/db_config.tt", "#{name}/config/db_config.rb")
   end
 
+  def generate_protofub_file
+    template("templates/protobuf_rake.tt", "#{name}/lib/tasks/generate_protobuf_files.rake")
+  end
+
   private
   def create_following_dirs(dir_paths)
     dir_paths.each do |dir_path|
