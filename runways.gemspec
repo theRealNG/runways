@@ -40,4 +40,4 @@ Gem::Specification.new do |spec|
   spec.add_dependency "grpc", "~> 1.16"
   spec.add_dependency "grpc-tools", "~> 1.16"
   spec.add_dependency "thor", "~> 0.20"
-end 
+end
