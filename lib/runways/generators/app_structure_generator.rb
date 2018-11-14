@@ -20,12 +20,13 @@ class AppStructure < Thor::Group
     lib_protos_directory = lib_directory + "/protos"
     tasks_directory = lib_directory + "/tasks"
     config_directory = root_directory + "/config"
+    test_directory = root_directory + "/test"
 
     create_following_dirs([
       root_directory, app_directory, config_directory,
       lib_directory, lib_protos_directory, tasks_directory,
       models_directory, controller_directory,
-      db_directory, migration_directory,
+      db_directory, migration_directory, test_directory,
     ])
   end
 
@@ -80,6 +81,16 @@ class AppStructure < Thor::Group
 
   def generate_protofub_file
     template("templates/protobuf_rake.tt", "#{name}/lib/tasks/generate_protobuf_files.rake")
+  end
+
+  def generate_test_client_file
+    template("templates/test_client.tt", "#{name}/test/test_client.rb")
+  end
+
+  def run_protoc_cmd
+    inside(name) do
+      run ("grpc_tools_ruby_protoc -I proto --ruby_out=lib/protos --grpc_out=lib/protos proto/#{name.underscore}.proto")
+    end
   end
 
   private

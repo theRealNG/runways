@@ -2,4 +2,13 @@ syntax = 'proto3';
 package <%= name %>;
 
 service <%= name.camelcase %>Service {
+	rpc Hello( HelloRequest ) returns ( HelloResponse ) {}
+}
+
+message HelloRequest {
+	string name = 1;
+}
+
+message HelloResponse {
+	string body = 1;
 }
