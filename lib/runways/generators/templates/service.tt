@@ -9,8 +9,12 @@ ActiveRecord::Base.establish_connection(
 )
 
 require './lib/protos/<%= name.underscore %>_services_pb'
-require './config/initializers'
 require './app'
 
 class <%= name.camelcase %>Service < <%= name.camelcase %>::<%= name.camelcase %>Service::Service
+	def hello(request, _unused_call)
+    <%= name.camelcase %>::HelloResponse.new(
+      body: "Hello #{request.name}"
+    )
+  end
 end

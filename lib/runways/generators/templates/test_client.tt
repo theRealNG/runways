@@ -1,0 +1,11 @@
+require './lib/protos/<%= name.underscore %>_services_pb'
+
+require 'grpc'
+
+stub = <%= name.camelcase %>::<%= name.camelcase %>Service::Stub.new(
+  '0.0.0.0:50052', :this_channel_is_insecure
+)
+
+request = <%= name.camelcase %>::HelloRequest.new(name: "Aliens")
+response = stub.hello(request)
+puts response.body
