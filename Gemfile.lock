@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    runways (0.1.4)
+    runways (0.1.5)
       activerecord (~> 5.2)
       grpc (~> 1.16)
       grpc-tools (~> 1.16)
@@ -34,7 +34,7 @@ GEM
       concurrent-ruby (~> 1.0)
     minitest (5.11.3)
     rake (10.5.0)
-    thor (0.20.0)
+    thor (0.20.3)
     thread_safe (0.3.6)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
