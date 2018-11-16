@@ -3,14 +3,11 @@
 class DbConfig
   def self.config
     {
-      adapter: '',
-      host: '',
-      username: '',
-      password: '',
-      database: '',
-      pool: '',
-      timeout: '',
-      reconnect: true
+      adapter: 'sqlite3',
+      host: 'localhost',
+      database: 'db/development.sqlite3',
+      pool: 5,
+      timeout: 5000,
     }
   end
 end

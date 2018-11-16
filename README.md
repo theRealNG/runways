@@ -36,7 +36,7 @@ Everyone interacting in the Runways project’s codebases, issue trackers, chat 
 
 ## TODO
 - [x] Setup rake tasks for active record migrations
-- [ ] Create a sample RPC
+- [x] Create a sample RPC
 - [ ] Setup logging
 - [ ] Use ActiveRecord generators to handle ActiveRecord related tasks ( ex: generate migration, migrate, rollback )
 - [ ] Create runways controller
