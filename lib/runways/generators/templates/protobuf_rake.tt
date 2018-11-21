@@ -3,5 +3,9 @@ namespace :protobuf_files do
 	task :update do
 		lang = ARGV[1] || 'ruby'
 		`grpc_tools_ruby_protoc -I proto --ruby_out=lib/protos --grpc_out=lib/protos proto/<%= name.underscore %>.proto`
+		pb_path = "./lib/protos/<%= name.underscore %>_services_pb.rb"
+		lines = File.readlines(pb_path)
+		lines[4] = "require_relative '<%= name.underscore %>_pb'\n"
+		File.open(pb_path, 'w') { |f| f.write(lines.join) }
 	end
 end

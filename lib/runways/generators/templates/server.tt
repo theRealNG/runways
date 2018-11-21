@@ -2,7 +2,8 @@ require 'rubygems'
 require 'bundler/setup'
 require './lib/<%= name.underscore %>_service'
 
-Bundler.require(:default)
+env = ENV['APP_ENV'] || 'development'
+Bundler.require(:default, env)
 
 class <%= name.camelize %>Server
   class << self

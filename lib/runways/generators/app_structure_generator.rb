@@ -54,13 +54,6 @@ class AppStructure < Thor::Group
     )
   end
 
-  def generate_models
-    template(
-      "templates/models.tt",
-      "#{name}/app/models.rb"
-    )
-  end
-
   def generate_service_file
     template(
       "templates/service.tt",
@@ -85,6 +78,10 @@ class AppStructure < Thor::Group
 
   def generate_test_client_file
     template("templates/test_client.tt", "#{name}/test/test_client.rb")
+  end
+
+  def generate_application_file
+    template("templates/application_config.tt", "#{name}/config/application.rb")
   end
 
   def run_protoc_cmd
