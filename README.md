@@ -6,16 +6,24 @@ Runways is a gRPC based ruby application. It will setup the basic project struct
 
 Install Runways at the command prompt:
 
-    $ gem install runways
+  $ gem install runways
 
 Create a new runways application:
 
-		$ runways hello
+  $ runways hello
 
 Run the following rake task to update protobuf files:
+
 ```ruby
 	rake protobuf_files:update
 ```
+
+Run the following command to start the server, the server will reload if any file is changed
+
+```ruby
+  APP_ENV=development rerun -- ruby SERVER_FILE.rb
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
