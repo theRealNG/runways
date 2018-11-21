@@ -2,4 +2,4 @@
 
 require 'runways'
 
-AppStructure.start
+Runways::CLI.start(ARGV)
