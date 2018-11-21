@@ -42,9 +42,9 @@ Everyone interacting in the Runways project’s codebases, issue trackers, chat 
 - [ ] Create runways controller
 - [ ] Refactor generator code
 - [ ] Refactor code to generate protobuf files when the application is initialized
-- [ ] Handle loading the server without DbConfig setup
+- [x] Handle loading the server without DbConfig setup
 - [ ] Handle DbConfig in the ActiveRecord style
 - [ ] Modify rake task to replace `require` with `require_relative` in the services pb file
-- [ ] Handle file loading like how rails handles it
+- [x] Handle file loading like how rails handles it
 - [ ] Accept package name from command line
 - [ ] Don't hard code port

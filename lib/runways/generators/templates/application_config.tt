@@ -1,5 +1,5 @@
 # setting load path
-$LOAD_PATH << File.join(File.dirname(__FILE__), "..", "app", "model")
+$LOAD_PATH << File.join(File.dirname(__FILE__), "..", "app", "models")
 $LOAD_PATH << File.join(File.dirname(__FILE__), ".")
 
 # loading required gems
@@ -8,6 +8,7 @@ require 'bundler/setup'
 Bundler.require(:default)
 
 # setting database connection
+require 'application_record'
 require 'db_config'
 ActiveRecord::Base.establish_connection(
   DbConfig.config

@@ -54,13 +54,6 @@ class AppStructure < Thor::Group
     )
   end
 
-  def generate_models
-    template(
-      "templates/models.tt",
-      "#{name}/app/models.rb"
-    )
-  end
-
   def generate_service_file
     template(
       "templates/service.tt",

@@ -1,6 +1,0 @@
-(
-  Dir[File.expand_path './app/models/*.rb'] - 
-  Dir[File.expand_path './app/models/application_record.rb']
-).each do |file|
-  require file
-end
