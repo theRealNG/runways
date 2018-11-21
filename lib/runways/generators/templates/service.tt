@@ -1,14 +1,4 @@
-require 'rubygems'
-require 'bundler/setup'
-require './config/db_config'
-
-Bundler.require(:default)
-
-ActiveRecord::Base.establish_connection(
-  DbConfig.config
-)
-
-require './lib/protos/<%= name.underscore %>_services_pb'
+require './config/application'
 
 class <%= name.camelcase %>Service < <%= name.camelcase %>::<%= name.camelcase %>Service::Service
 	def hello(request, _unused_call)

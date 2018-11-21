@@ -87,6 +87,10 @@ class AppStructure < Thor::Group
     template("templates/test_client.tt", "#{name}/test/test_client.rb")
   end
 
+  def generate_application_file
+    template("templates/application_config.tt", "#{name}/config/application.rb")
+  end
+
   def run_protoc_cmd
     inside(name) do
       run ("grpc_tools_ruby_protoc -I proto --ruby_out=lib/protos --grpc_out=lib/protos proto/#{name.underscore}.proto")
