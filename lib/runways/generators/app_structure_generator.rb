@@ -9,91 +9,198 @@ class AppStructure < Thor::Group
     File.dirname(__FILE__)
   end
 
-  def create_basic_app_structure
-    root_directory = name.to_s
-    app_directory = root_directory + "/app"
-    models_directory = app_directory + "/models"
-    controller_directory = app_directory + "/controllers"
-    db_directory = root_directory + "/db"
-    migration_directory = db_directory + "/migrate"
-    lib_directory = root_directory + "/lib"
-    lib_protos_directory = lib_directory + "/protos"
-    tasks_directory = lib_directory + "/tasks"
-    config_directory = root_directory + "/config"
-    test_directory = root_directory + "/test"
+  def root_directory
+    app_name = name.to_s
+    empty_directory(app_name)
+    path = app_name
 
-    create_following_dirs([
-      root_directory, app_directory, config_directory,
-      lib_directory, lib_protos_directory, tasks_directory,
-      models_directory, controller_directory,
-      db_directory, migration_directory, test_directory,
-    ])
+    app_directory(path)
+    db_directory(path)
+    lib_directory(path)
+    proto_directory(path)
+    config_directory(path)
+    test_directory(path)
+
+    generate_gemfile(path)
+    generate_rake_file(path)
+    generate_server_file(path)
+
+    run_protoc_cmd(path)
+    run_bundle_install(path)
   end
 
-  def generate_proto_file
-    # generate from template
-    template("templates/proto.tt", "#{name}/proto/#{name}.proto")
+  private
+  def app_directory(path)
+    path += "/app"
+    empty_directory(path)
+
+    models_directory(path)
   end
 
-  def generate_gemfile
-    template("templates/gemfile.tt", "#{name}/Gemfile")
+  def models_directory(path)
+    path += "/models"
+    empty_directory(path)
+
+    generate_application_record(path)
   end
 
-  def generate_db_rake_file
-    template("templates/db_rake.tt", "#{name}/lib/tasks/db.rake")
+  def generate_application_record(path)
+    path += "/"
+    template_name = "application_record"
+    generate_template(path: path, template_name: template_name, extenstion: 'rb')
   end
 
-  def generate_rake_file
-    template("templates/rakefile.tt", "#{name}/Rakefile")
+  def db_directory(path)
+    path += "/db"
+    empty_directory(path)
+
+    migration_directory(path)
   end
 
-  def generate_application_record
-    template(
-      "templates/application_record.tt",
-      "#{name}/app/models/application_record.rb"
+  def migration_directory(path)
+    path += "/migrate"
+    empty_directory(path)
+  end
+
+  def lib_directory(path)
+    path += "/lib"
+    empty_directory(path)
+
+    protos_directory(path)
+    tasks_directory(path)
+
+    generate_service_file(path)
+  end
+
+  def protos_directory(path)
+    path += "/protos"
+    empty_directory(path)
+  end
+
+  def tasks_directory(path)
+    path += "/tasks"
+    empty_directory(path)
+
+    generate_db_rake_file(path)
+    generate_protofub_rake_file(path)
+  end
+
+  def generate_db_rake_file(path)
+    path += "/"
+    generate_template(
+      path: path, extenstion: 'rake', template_name: 'db'
     )
   end
 
-  def generate_service_file
-    template(
-      "templates/service.tt",
-      "#{name}/lib/#{name.underscore}_service.rb"
+  def generate_protofub_rake_file(path)
+    path += "/"
+    generate_template(
+      path: path, extenstion: 'rake', template_name: 'generate_protobuf_files'
     )
   end
 
-  def generate_server_file
-    template(
-      "templates/server.tt",
-      "#{name}/#{name.underscore}_server.rb"
+  def generate_service_file(path)
+    path += "/"
+    file_name = "#{name.underscore}_service"
+
+    generate_template(
+      path: path, file_name: file_name,
+      extenstion: 'rb', template_name: "service"
     )
   end
 
-  def generate_db_config_file
-    template("templates/db_config.tt", "#{name}/config/db_config.rb")
+  def proto_directory(path)
+    path += "/proto"
+    empty_directory(path)
+
+    generate_proto_file(path)
   end
 
-  def generate_protofub_file
-    template("templates/protobuf_rake.tt", "#{name}/lib/tasks/generate_protobuf_files.rake")
+  def generate_proto_file(path)
+    path += "/"
+    generate_template(
+      path: path, extenstion: 'proto', template_name: 'proto', file_name: name
+    )
   end
 
-  def generate_test_client_file
-    template("templates/test_client.tt", "#{name}/test/test_client.rb")
+  def config_directory(path)
+    path += "/config"
+    empty_directory(path)
+
+    generate_db_config_file(path)
+    generate_application_config_file(path)
   end
 
-  def generate_application_file
-    template("templates/application_config.tt", "#{name}/config/application.rb")
+  def generate_db_config_file(path)
+    path += "/"
+    generate_template(
+      path: path, extenstion: 'rb', template_name: 'db_config'
+    )
   end
 
-  def run_protoc_cmd
-    inside(name) do
+  def generate_application_config_file(path)
+    path += "/"
+    generate_template(
+      path: path, extenstion: 'rb', template_name: 'application'
+    )
+  end
+
+  def test_directory(path)
+    path += "/test"
+    empty_directory(path)
+
+    generate_test_client_file(path)
+  end
+
+  def generate_test_client_file(path)
+    path += "/"
+    generate_template(
+      path: path, extenstion: 'rb', template_name: 'test_client'
+    )
+  end
+
+  def generate_gemfile(path)
+    path += "/"
+    generate_template(
+      path: path, template_name: 'Gemfile'
+    )
+  end
+
+  def generate_rake_file(path)
+    path += "/"
+    generate_template(
+      path: path, template_name: 'Rakefile'
+    )
+  end
+
+  def generate_server_file(path)
+    path += "/"
+    generate_template(
+      path: path, template_name: 'server',
+      file_name: name + "_server", extenstion: 'rb'
+    )
+  end
+
+  def run_protoc_cmd(path)
+    inside(path) do
       run ("grpc_tools_ruby_protoc -I proto --ruby_out=lib/protos --grpc_out=lib/protos proto/#{name.underscore}.proto")
     end
   end
 
-  private
-  def create_following_dirs(dir_paths)
-    dir_paths.each do |dir_path|
-      empty_directory(dir_path)
+  def run_bundle_install(path)
+    inside(path) do
+      run ("bundle install")
     end
+  end
+
+  def templates_directory
+    "templates"
+  end
+
+  def generate_template(path:, template_name:, extenstion: '', file_name: nil)
+    template(
+      path.sub(name, templates_directory) + template_name + ".tt",
+      path + ( file_name ? file_name : template_name ) + ( extenstion.present? ? '.' + extenstion : extenstion )
+    )
   end
 end
