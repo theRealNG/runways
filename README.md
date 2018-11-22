@@ -1,5 +1,4 @@
 # Runways
-
 Runways is a gRPC based ruby application. It will setup the basic project structure with active_record ORM.
 
 ## Installation
@@ -10,7 +9,7 @@ Install Runways at the command prompt:
 
 Create a new runways application:
 
-  $ runways hello
+  $ runways new hello
 
 Run the following rake task to update protobuf files:
 
@@ -48,7 +47,7 @@ Everyone interacting in the Runways project’s codebases, issue trackers, chat 
 - [ ] Setup logging
 - [ ] Use ActiveRecord generators to handle ActiveRecord related tasks ( ex: generate migration, migrate, rollback )
 - [ ] Create runways controller
-- [ ] Refactor generator code
+- [x] Refactor generator code
 - [ ] Refactor code to generate protobuf files when the application is initialized
 - [x] Handle loading the server without DbConfig setup
 - [ ] Handle DbConfig in the ActiveRecord style
