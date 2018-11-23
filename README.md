@@ -55,3 +55,7 @@ Everyone interacting in the Runways project’s codebases, issue trackers, chat 
 - [x] Handle file loading like how rails handles it
 - [ ] Accept package name from command line
 - [ ] Don't hard code port
+- [ ] Figure out how to handle nil values in the GRPC request
+- [ ] Add callbacks for RPC's
+- [ ] Test for streaming rpcs
+- [ ] How to generalize interceptors for simple & streaming rpcs
