@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'thor'
 
 class AppStructure < Thor::Group
@@ -30,40 +32,43 @@ class AppStructure < Thor::Group
   end
 
   private
+
   def app_directory(path)
-    path += "/app"
+    path += '/app'
     empty_directory(path)
 
     models_directory(path)
   end
 
   def models_directory(path)
-    path += "/models"
+    path += '/models'
     empty_directory(path)
 
     generate_application_record(path)
   end
 
   def generate_application_record(path)
-    path += "/"
-    template_name = "application_record"
-    generate_template(path: path, template_name: template_name, extenstion: 'rb')
+    path += '/'
+    template_name = 'application_record'
+    generate_template(
+      path: path, template_name: template_name, extenstion: 'rb'
+    )
   end
 
   def db_directory(path)
-    path += "/db"
+    path += '/db'
     empty_directory(path)
 
     migration_directory(path)
   end
 
   def migration_directory(path)
-    path += "/migrate"
+    path += '/migrate'
     empty_directory(path)
   end
 
   def lib_directory(path)
-    path += "/lib"
+    path += '/lib'
     empty_directory(path)
 
     protos_directory(path)
@@ -73,12 +78,12 @@ class AppStructure < Thor::Group
   end
 
   def protos_directory(path)
-    path += "/protos"
+    path += '/protos'
     empty_directory(path)
   end
 
   def tasks_directory(path)
-    path += "/tasks"
+    path += '/tasks'
     empty_directory(path)
 
     generate_db_rake_file(path)
@@ -86,45 +91,45 @@ class AppStructure < Thor::Group
   end
 
   def generate_db_rake_file(path)
-    path += "/"
+    path += '/'
     generate_template(
       path: path, extenstion: 'rake', template_name: 'db'
     )
   end
 
   def generate_protofub_rake_file(path)
-    path += "/"
+    path += '/'
     generate_template(
       path: path, extenstion: 'rake', template_name: 'generate_protobuf_files'
     )
   end
 
   def generate_service_file(path)
-    path += "/"
+    path += '/'
     file_name = "#{name.underscore}_service"
 
     generate_template(
       path: path, file_name: file_name,
-      extenstion: 'rb', template_name: "service"
+      extenstion: 'rb', template_name: 'service'
     )
   end
 
   def proto_directory(path)
-    path += "/proto"
+    path += '/proto'
     empty_directory(path)
 
     generate_proto_file(path)
   end
 
   def generate_proto_file(path)
-    path += "/"
+    path += '/'
     generate_template(
       path: path, extenstion: 'proto', template_name: 'proto', file_name: name
     )
   end
 
   def config_directory(path)
-    path += "/config"
+    path += '/config'
     empty_directory(path)
 
     generate_db_config_file(path)
@@ -132,75 +137,79 @@ class AppStructure < Thor::Group
   end
 
   def generate_db_config_file(path)
-    path += "/"
+    path += '/'
     generate_template(
       path: path, extenstion: 'rb', template_name: 'db_config'
     )
   end
 
   def generate_application_config_file(path)
-    path += "/"
+    path += '/'
     generate_template(
       path: path, extenstion: 'rb', template_name: 'application'
     )
   end
 
   def test_directory(path)
-    path += "/test"
+    path += '/test'
     empty_directory(path)
 
     generate_test_client_file(path)
   end
 
   def generate_test_client_file(path)
-    path += "/"
+    path += '/'
     generate_template(
       path: path, extenstion: 'rb', template_name: 'test_client'
     )
   end
 
   def generate_gemfile(path)
-    path += "/"
+    path += '/'
     generate_template(
       path: path, template_name: 'Gemfile'
     )
   end
 
   def generate_rake_file(path)
-    path += "/"
+    path += '/'
     generate_template(
       path: path, template_name: 'Rakefile'
     )
   end
 
   def generate_server_file(path)
-    path += "/"
+    path += '/'
     generate_template(
       path: path, template_name: 'server',
-      file_name: name + "_server", extenstion: 'rb'
+      file_name: name + '_server', extenstion: 'rb'
     )
   end
 
   def run_protoc_cmd(path)
     inside(path) do
-      run ("grpc_tools_ruby_protoc -I proto --ruby_out=lib/protos --grpc_out=lib/protos proto/#{name.underscore}.proto")
+      run 'grpc_tools_ruby_protoc'\
+        '-I proto --ruby_out=lib/protos'\
+        '--grpc_out=lib/protos'\
+        "proto/#{name.underscore}.proto"
     end
   end
 
   def run_bundle_install(path)
     inside(path) do
-      run ("bundle install")
+      run 'bundle install'
     end
   end
 
   def templates_directory
-    "templates"
+    'templates'
   end
 
   def generate_template(path:, template_name:, extenstion: '', file_name: nil)
     template(
-      path.sub(name, templates_directory) + template_name + ".tt",
-      path + ( file_name ? file_name : template_name ) + ( extenstion.present? ? '.' + extenstion : extenstion )
+      path.sub(name, templates_directory) + template_name + '.tt',
+      path + (file_name || template_name) +
+        (extenstion.present? ? '.' + extenstion : extenstion)
     )
   end
 end

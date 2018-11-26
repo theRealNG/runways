@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Object
   def self.const_missing(c)
     return nil if @calling_const_missing

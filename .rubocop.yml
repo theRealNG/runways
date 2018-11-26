@@ -1,0 +1,12 @@
+AllCops:
+  TargetRubyVersion: 2.4
+
+Metrics/BlockLength:
+  Exclude:
+    - runways.gemspec
+Metrics/ClassLength:
+  Exclude:
+    - lib/runways/generators/app_structure_generator.rb
+Metrics/MethodLength:
+  Exclude:
+    - lib/runways/generators/app_structure_generator.rb

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Runways
   class BaseInterceptor < ::GRPC::ServerInterceptor
     def all_request_responses(request: nil, call: nil, method: nil)
